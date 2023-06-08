@@ -1,0 +1,36 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.hero__container {
+  width: 100%;
+  max-width: 1280px;
+  padding: 50px 70px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  box-sizing: border-box;
+  background-color: #DDDEE3;
+  gap: 102px;
+}
+
+.hero__about-project {
+  display: flex;
+  flex-direction: column;
+  max-width: 640px;
+}
+
+.hero__title {
+  margin: 0;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 52px;
+}
+
+.hero__logo {
+  align-self: flex-end;
+}
