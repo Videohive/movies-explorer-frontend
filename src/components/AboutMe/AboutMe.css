@@ -1,0 +1,91 @@
+.about-me {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-me__container {
+  width: 100%;
+  max-width: 1280px;
+  padding: 110px 70px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.about-me__title {
+  width: 100%;
+  margin: 0;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 28px;
+  letter-spacing: -0.04em;
+  border-bottom: 1px solid black;
+  padding-bottom: 23px;
+  box-sizing: border-box;
+}
+
+.about-me__bio-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 66px;
+  gap: 50px;
+}
+
+.about-me__bio {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-me__name {
+  margin: 0;
+  font-size: 50px;
+  line-height: 58px;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+
+.about-me__age {
+  margin: 18px 0 0;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.about-me__text {
+  margin: 26px 0 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.57;
+}
+
+.about-me__socials {
+  margin: 100px 0 0;
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.about-me__social-link {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: black;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.about-me__social-link:hover {
+  opacity: 0.7;
+}
+
+.about-me__avatar {
+  width: 270px;
+  object-fit: cover;
+  border-radius: 10px;
+}
