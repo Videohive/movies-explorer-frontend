@@ -12,5 +12,21 @@
   width: 100%;
   max-width: 1280px;
   padding: 18px 70px;
+}
+
+.header_theme_bright {
   background-color: #DDDEE3;
+}
+
+.header_theme_dark {
+  background-color: #FAFAFA;
+}
+
+.header__link {
+  height: 38px;
+  transition: all 0.3s ease-in-out;
+}
+
+.header__link:hover {
+  transform: scale(0.95);
 }

@@ -8,7 +8,7 @@ export default function Portfolio() {
         <ul className="portfolio__projects-list">
           <li className="portfolio__projects-item">
             <a
-              href="#"
+              href="https://github.com/Videohive/how-to-learn"
               target="_blank"
               rel="noreferrer"
               className="portfolio__link"
@@ -18,7 +18,7 @@ export default function Portfolio() {
           </li>
           <li className="portfolio__projects-item">
             <a
-              href="#"
+              href="https://videohive.github.io/russian-travel/"
               target="_blank"
               rel="noreferrer"
               className="portfolio__link"
@@ -28,7 +28,7 @@ export default function Portfolio() {
           </li>
           <li className="portfolio__projects-item">
             <a
-              href="#"
+              href="https://github.com/Videohive/react-mesto-api-full-gha"
               target="_blank"
               rel="noreferrer"
               className="portfolio__link"
