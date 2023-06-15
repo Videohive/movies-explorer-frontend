@@ -21,7 +21,7 @@ export default function AboutMe() {
             <ul className="about-me__socials">
               <li>
                 <a
-                  href="#"
+                  href="https://github.com/Videohive"
                   target="_blank"
                   rel="noreferrer"
                   className="about-me__social-link"

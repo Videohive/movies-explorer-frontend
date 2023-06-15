@@ -3,7 +3,6 @@ import "./SavedMovies.css";
 import { useEffect, useState } from "react";
 import SearchForm from "../SearchForm/SearchForm.jsx";
 import MoviesCardList from "../MoviesCardList/MoviesCardList.jsx";
-import Footer from "../Footer/Footer.jsx";
 import initialFilms from "../../utils/initialFilms.json";
 
 const SavedMovies = () => {
@@ -23,7 +22,6 @@ const SavedMovies = () => {
     <main className="saved-movies">
       <SearchForm />
       <MoviesCardList/>
-      <Footer />
       </main>
     </>
   );

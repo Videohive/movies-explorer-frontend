@@ -4,7 +4,6 @@ import AboutProject from "../AboutProject/AboutProject.jsx";
 import Technology from "../Technology/Technology.jsx";
 import AboutMe from "../AboutMe/AboutMe.jsx";
 import Portfolio from "../Portfolio/Portfolio.jsx";
-import Footer from "../Footer/Footer.jsx";
 
 export default function Main() {
   return (
@@ -14,7 +13,6 @@ export default function Main() {
       <Technology />
       <AboutMe />
       <Portfolio />
-      <Footer />
     </main>
   );
 }
