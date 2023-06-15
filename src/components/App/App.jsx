@@ -8,6 +8,7 @@ import Movies from "../Movies/Movies.jsx";
 import SavedMovies from "../SavedMovies/SavedMovies.jsx";
 import Profile from "../Profile/Profile.jsx";
 import Register from "../Register/Register.jsx";
+import Login from "../Login/Login.jsx";
 
 export default function App() {
 
@@ -20,7 +21,8 @@ export default function App() {
           <Route path="/movies" element={<Movies />} />
           <Route path="/saved-movies" element={<SavedMovies />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/signup" element={<Register />} />
+          <Route path="/signin" element={<Login />} />
         </Routes>
         <Footer />
       </div>

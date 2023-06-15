@@ -1,5 +1,5 @@
 import './Navigation.css';
-import {NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 export default function Navigation() {
   const location = useLocation();
@@ -9,12 +9,14 @@ export default function Navigation() {
         <nav className="navigation">
           <ul className="navigation__list">
             <li>
-            <NavLink to='/register' className='navigation__link navigation__link_landing'>
-              Регистрация
+              <NavLink to='/signup' className='navigation__link navigation__link_landing'>
+                Регистрация
               </NavLink>
             </li>
-            <li className='navigation__link navigation__link_landing navigation__link_signin'>
-              Войти
+            <li >
+              <NavLink to='/signin' className='navigation__link navigation__link_landing navigation__link_signin'>
+                Войти
+              </NavLink>
             </li>
           </ul>
         </nav>

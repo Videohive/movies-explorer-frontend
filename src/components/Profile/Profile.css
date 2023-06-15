@@ -7,7 +7,7 @@
   padding: 74px 30px 40px;
   box-sizing: border-box;
   min-height: calc(100vh - 74px);
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 
 .profile__form {
@@ -64,13 +64,27 @@
   text-align: right;
 }
 
-.profile__input[type='email'] {
+.profile__input[type="email"] {
   border: none;
 }
 
 .profile__input:focus {
   border-bottom: solid 1px #3456f3;
   outline: none;
+}
+
+.profile__input_error {
+  color: #ee3465;
+  border-bottom: solid 1px #ee3465;
+}
+
+.profile__input_error[type="email"] {
+  color: #ee3465;
+  border-bottom: solid 1px #ee3465;
+}
+
+.profile__input_error:focus {
+  border-bottom: solid 1px #ee3465;
 }
 
 .profile__button-container {
@@ -91,7 +105,7 @@
 }
 
 .profile__button-edit:hover {
-  opacity: .8;
+  opacity: 0.8;
 }
 
 .profile__button-exit {
@@ -100,11 +114,24 @@
   font-size: 13px;
   line-height: 16px;
   background-color: transparent;
-  color: #EE3465;
+  color: #ee3465;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
 
 .profile__button-exit:hover {
-  opacity: .8;
+  opacity: 0.8;
+}
+
+.profile__button-edit_disabled:hover {
+  opacity: 1;
+  cursor: default;
+}
+
+.profile__error {
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #ee3465;
 }
