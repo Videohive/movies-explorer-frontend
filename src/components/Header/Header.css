@@ -30,3 +30,15 @@
 .header__link:hover {
   transform: scale(0.95);
 }
+
+@media screen and (max-width: 900px) {
+  .header__container {
+    padding: 18px 30px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .header__container {
+    padding: 18px 14px;
+  }
+}

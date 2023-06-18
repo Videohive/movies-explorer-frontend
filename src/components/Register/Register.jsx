@@ -20,7 +20,7 @@ export default function Register() {
   return (
     <main className="register">
       <form className="register__form" name="register" onSubmit={handleSubmit}>
-        <Link to="/">
+        <Link to="/" className="register__link register__link-logo">
           <img src={logo} alt="Логотип" className="register__logo" />
         </Link>
         <h1 className="register__title">Добро пожаловать!</h1>

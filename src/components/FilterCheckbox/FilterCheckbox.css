@@ -4,7 +4,7 @@
   align-items: center;
   width: 156px;
   height: 20px;
-  margin-top: 29px;
+  margin-top: 31px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -63,4 +63,15 @@
 
 .filter__checkbox:checked::after {
   background-color: #2be080;
+}
+
+@media screen and (max-width: 400px) {
+  .filter{
+    margin-top: 45px;
+    width: 148px;
+  }
+
+  .filter__text {
+    font-size: 11px;
+  }
 }

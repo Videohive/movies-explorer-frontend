@@ -80,3 +80,38 @@
   opacity: 0.8;
   scale: 1.15;
 }
+
+@media screen and (max-width: 800px) {
+  .movies-card {
+    width: 339px;
+    height: 262px;
+  }
+
+  .movies-card__column {
+    padding: 9px 16px 5px;
+  }
+
+  .movies-card__image {
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .movies-card {
+    width: 300px;
+    height: 237px;
+  }
+
+  .movies-card__column {
+    padding: 9px 16px 5px;
+  }
+
+  .movies-card__image {
+    height: 168px;
+  }
+
+  .movies-card__title {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

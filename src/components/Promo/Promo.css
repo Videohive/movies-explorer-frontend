@@ -21,7 +21,7 @@
 .promo__about-project {
   display: flex;
   flex-direction: column;
-  max-width: 640px;
+  max-width: 624px;
 }
 
 .promo__title {
@@ -33,4 +33,40 @@
 
 .promo__logo {
   align-self: flex-end;
+}
+
+@media screen and (max-width: 800px) {
+  .promo__container {
+    padding: 300px 44px 70px;
+    align-items: center;
+    gap: 140px;
+  }
+
+  .promo__title {
+    max-width: 680px;
+    text-align: center;
+  }
+
+  .promo__logo {
+    align-self: center;
+    max-width: 680px;
+  }
+
+  .promo__about-project {
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .promo__container {
+    padding: 183px 10px 40px;
+    gap: 60px;
+  }
+
+  .promo__title {
+    max-width: 300px;
+    font-size: 31px;
+    line-height: 39px;
+    letter-spacing: -0.04em;
+  }
 }

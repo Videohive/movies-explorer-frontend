@@ -25,7 +25,7 @@ export default function Login() {
         noValidate
         onSubmit={handleSubmit}
       >
-        <Link to="/" className="login__link">
+        <Link to="/" className="login__link login__link-logo">
           <img src={logo} alt="Логотип" className="login__logo" />
         </Link>
         <h1 className="login__title">Рады видеть!</h1>

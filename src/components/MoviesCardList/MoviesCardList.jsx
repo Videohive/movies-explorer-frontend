@@ -9,23 +9,20 @@ const MoviesCardList = () => {
   const remainingFilms = initialFilms.slice(films.length);
   const [isLoading, setIsLoading] = useState(true);
 
-  // временная функция прелодера чтобы показать момент загрузки
+  function viewStillFilms() {
+    setIsLoading(true);
+    setFilms([...films, ...remainingFilms.slice(0, 6)]);
+    setIsLoading(false);
+  }
+
   useEffect(() => {
     viewStillFilms()
   }, [])
 
-  function viewStillFilms () {
-    setIsLoading(true)
-    setTimeout(() => {
-      setIsLoading(false)
-      setFilms([...films, ...remainingFilms.slice(0, 9)])
-    }, 1000)
-  }
-
   return (
     <section className="movies-card-list">
       {films.length ? (
-        <ul className='movies-card-list__lis'>
+        <ul className='movies-card-list__list'>
           {films.map((movie, index) => <MoviesCard movie={movie} key={index} />)}
         </ul>
       ) : ''}

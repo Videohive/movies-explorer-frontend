@@ -14,7 +14,7 @@
   justify-content: space-between;
   box-sizing: border-box;
   gap: 50px;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 
 .portfolio__title {
@@ -22,7 +22,7 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 20px;
-  color: #A0A0A0;
+  color: #a0a0a0;
 }
 
 .portfolio__projects-list {
@@ -37,7 +37,7 @@
 .portfolio__projects-item {
   display: flex;
   padding-bottom: 19px;
-  border-bottom: 1px solid #E8E8E8;
+  border-bottom: 1px solid #e8e8e8;
   box-sizing: border-box;
   transition: all 0.3s ease-in-out;
 }
@@ -53,7 +53,7 @@
   text-decoration: none;
   font-weight: 400;
   font-size: 30px;
-  line-height: 40px;
+  line-height: 50px;
   letter-spacing: -0.04em;
   color: black;
   transition: all 0.3s ease-in-out;
@@ -64,10 +64,10 @@
 }
 
 .portfolio__link::after {
-  content: '';
+  content: "";
   width: 24px;
   height: 18px;
-  background-image: url('../../images/arrow.svg');
+  background-image: url("../../images/arrow.svg");
   background-repeat: no-repeat;
   background-size: contain;
   position: absolute;
@@ -79,4 +79,36 @@
 
 .portfolio__link:hover:after {
   transform: rotate(45deg);
+}
+
+@media screen and (max-width: 800px) {
+  .portfolio__container {
+    padding: 0px 50px 90px;
+  }
+
+  .portfolio__link {
+    font-size: 28px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .portfolio__container {
+    padding: 0px 14px 70px;
+    gap: 40px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .portfolio__link {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .portfolio__link::after {
+    width: 12px;
+  }
+
 }
