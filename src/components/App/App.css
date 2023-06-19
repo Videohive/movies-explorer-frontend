@@ -8,7 +8,7 @@
     position: relative;
     font-family: 'Inter', Arial, sans-serif;
     color: #000;
-    overflow: hidden;
+    scrollbar-gutter: stable;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;

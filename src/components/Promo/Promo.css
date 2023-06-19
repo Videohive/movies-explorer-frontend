@@ -16,6 +16,7 @@
   box-sizing: border-box;
   background-color: #DDDEE3;
   gap: 102px;
+  overflow: hidden;
 }
 
 .promo__about-project {

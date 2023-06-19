@@ -11,7 +11,7 @@ export default function Header() {
     return (
       <header className={"header"}>
         <div
-          className={`header__container header_theme_${
+          className={`header__container header__container_theme_${
             location.pathname === "/" ? "bright" : "dark"
           }`}
         >

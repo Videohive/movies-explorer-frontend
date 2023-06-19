@@ -26,7 +26,6 @@ const MoviesCard = ({ movie }) => {
         <h4 className='movies-card__title'>{nameRU}</h4>
         {location.pathname === '/movies' && (
         <button
-          href='#'
           className={`movies-card__like${isLiked ? ' movies-card__like_active' : ''}`}
           onClick={handleClickLikeButton}
           title={`${isLiked ? 'Удалить из избранного' : 'Добавить в избранное'}`}
@@ -34,7 +33,6 @@ const MoviesCard = ({ movie }) => {
         )}
         {location.pathname === '/saved-movies' && (
           <button
-            href='#'
             className='movies-card__delete'
             title="Удалить из избранного"
         >&#215;</button>

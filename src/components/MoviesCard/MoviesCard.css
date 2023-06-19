@@ -81,7 +81,7 @@
   scale: 1.15;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   .movies-card {
     width: 339px;
     height: 262px;
@@ -96,7 +96,7 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 715px) {
   .movies-card {
     width: 300px;
     height: 237px;

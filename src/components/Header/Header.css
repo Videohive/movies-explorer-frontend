@@ -14,11 +14,11 @@
   padding: 18px 70px;
 }
 
-.header_theme_bright {
+.header__container_theme_bright {
   background-color: #DDDEE3;
 }
 
-.header_theme_dark {
+.header__container_theme_dark {
   background-color: #FAFAFA;
 }
 
@@ -31,13 +31,13 @@
   transform: scale(0.95);
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 800px) {
   .header__container {
     padding: 18px 30px;
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 400px) {
   .header__container {
     padding: 18px 14px;
   }

@@ -6,7 +6,7 @@ import Burger from '../Burger/Burger.jsx';
 export default function Navigation() {
 
   const [open, setOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 800);
   const location = useLocation();
 
   function CustomLink({ to, children, className, isMobile }) {
@@ -25,7 +25,7 @@ export default function Navigation() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 900);
+      setIsMobile(window.innerWidth < 800);
     };
     window.addEventListener('resize', handleResize);
     return () => {
@@ -43,12 +43,12 @@ export default function Navigation() {
         {location.pathname === "/" ? (
           <>
             <li>
-              <NavLink to='/signup' className='navigation__link navigation__link_landing'>
+              <NavLink to='/signup' className='navigation__link navigation__link-register navigation__link_landing'>
                 Регистрация
               </NavLink>
             </li>
             <li>
-              <NavLink to='/signin' className='navigation__link navigation__link_signin'>
+              <NavLink to='/signin' className='navigation__link navigation__link_landing navigation__link_signin'>
                 Войти
               </NavLink>
             </li>

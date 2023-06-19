@@ -31,13 +31,17 @@
 .navigation__link {
   display: flex;
   align-items: center;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
   color: #000;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+}
+
+.navigation__link-register {
+  font-weight: 500;
 }
 
 .navigation__link-burger {
@@ -127,8 +131,14 @@
 }
 
 @media screen and (max-width: 800px) {
+
   .navigation__list {
-    gap: 28px;
+    gap: 28px 30px;
+  }
+
+  .navigation__link_landing{
+    font-size: 12px;
+    line-height: 16px;
   }
 
   .navigation__item:last-child {
@@ -146,8 +156,8 @@
   }
 
   .navigation__list {
-    row-gap: 14px;
-    column-gap: 24px;
+    row-gap: 24px;
+    column-gap: 14px;
   }
 
   .navigation__link-mobile {
