@@ -1,0 +1,44 @@
+.header {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1280px;
+  padding: 18px 70px;
+}
+
+.header__container_theme_bright {
+  background-color: #DDDEE3;
+}
+
+.header__container_theme_dark {
+  background-color: #FAFAFA;
+}
+
+.header__link {
+  height: 38px;
+  transition: all 0.3s ease-in-out;
+}
+
+.header__link:hover {
+  transform: scale(0.95);
+}
+
+@media screen and (max-width: 800px) {
+  .header__container {
+    padding: 18px 30px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .header__container {
+    padding: 18px 14px;
+  }
+}
