@@ -2,15 +2,16 @@ import "./Register.css";
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 
-import { useEffect } from "react";
+import {useState, useEffect } from "react";
 import useFormWithValidation from "../../hooks/useFormWithValidation.jsx";
 
-export default function Register() {
+export default function Register({ handleRegister, serverError }) {
   const { values, handleChange, resetForm, errors, isValid } =
     useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
+    handleRegister(values)
   }
 
   useEffect(() => {
@@ -68,6 +69,7 @@ export default function Register() {
             <span className="register__error">{errors.password || ""}</span>
           </label>
         </div>
+        {serverError &&<span className="register__error register__error-message">{serverError}</span>}
         <button
           type="submit"
           className={`register__button ${

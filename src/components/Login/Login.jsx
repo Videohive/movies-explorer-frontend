@@ -5,12 +5,13 @@ import logo from "../../images/logo.svg";
 import { useEffect } from "react";
 import useFormWithValidation from "../../hooks/useFormWithValidation.jsx";
 
-export default function Login() {
+export default function Login({ handleLogin, serverError }) {
   const { values, handleChange, resetForm, errors, isValid } =
     useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
+    handleLogin(values);
   }
 
   useEffect(() => {
@@ -61,6 +62,7 @@ export default function Login() {
             <span className="login__error">{errors.password || ""}</span>
           </label>
         </div>
+        {serverError &&<span className="login__error login__error-message">{serverError}</span>}
         <button
           type="submit"
           className={`login__button ${

@@ -152,6 +152,13 @@
   color: #ee3465;
 }
 
+.login__error-message {
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  min-height: 12px;
+}
+
 @media screen and (max-width: 400px) {
   .login {
     padding: 56px 30px;

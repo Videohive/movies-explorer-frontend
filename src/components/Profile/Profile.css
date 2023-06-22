@@ -136,6 +136,11 @@
   color: #ee3465;
 }
 
+.profile__error-message {
+  position: absolute;
+  bottom: 60px;
+  min-height: 12px;
+}
 
 @media screen and (max-width: 400px) {
   .profile {
