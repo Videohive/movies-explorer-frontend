@@ -2,16 +2,12 @@ import "./App.css";
 import mainApi from "../../utils/MainApi.js";
 import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
 import { useState, useEffect } from "react";
-import {
-  useRoutes,
-  useNavigate,
-  useLocation,
-} from "react-router-dom";
+import { useRoutes, useNavigate, useLocation } from "react-router-dom";
 
 import Header from "../Header/Header.jsx";
 import Footer from "../Footer/Footer.jsx";
 import Main from "../Main/Main.jsx";
-import Preloader from '../Preloader/Preloader.jsx';
+import Preloader from "../Preloader/Preloader.jsx";
 import Movies from "../Movies/Movies.jsx";
 import SavedMovies from "../SavedMovies/SavedMovies.jsx";
 import Profile from "../Profile/Profile.jsx";
@@ -19,6 +15,7 @@ import Register from "../Register/Register.jsx";
 import Login from "../Login/Login.jsx";
 import NotFound from "../NotFound/NotFound.jsx";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
+import InfoTooltip from "../InfoTooltip/InfoTooltip.jsx";
 
 export default function App() {
   const navigate = useNavigate();
@@ -27,7 +24,7 @@ export default function App() {
   const [isLoader, setIsLoader] = useState(false);
   const [isInfoTooltip, setIsInfoTooltip] = useState({
     isOpen: false,
-    successful: true,
+    status: true,
     text: "",
   });
 
@@ -47,6 +44,10 @@ export default function App() {
     };
 
     return <NotFound goBack={goBack} />;
+  }
+
+  function closeInfoTooltip() {
+    setIsInfoTooltip({ ...isInfoTooltip, isOpen: false });
   }
 
   function handleRegister({ name, email, password }) {
@@ -121,7 +122,7 @@ export default function App() {
       const newMovie = await mainApi.addNewMovie(movie);
       setSavedMoviesList([newMovie, ...savedMoviesList]);
     } catch (err) {
-      setIsInfoTooltip({ isOpen: true, successful: false, text: err });
+      setIsInfoTooltip({ isOpen: true, status: false, text: err });
     }
   }
 
@@ -137,7 +138,7 @@ export default function App() {
       );
       setSavedMoviesList(newMoviesList);
     } catch (err) {
-      setIsInfoTooltip({ isOpen: true, successful: false, text: err });
+      setIsInfoTooltip({ isOpen: true, status: false, text: err });
     }
   }
 
@@ -156,7 +157,7 @@ export default function App() {
             navigate(path, { replace: true });
           }
         } catch (err) {
-          //setIsInfoTooltip({ isOpen: true, successful: false, text: err });
+          setIsInfoTooltip({ isOpen: true, status: false, text: err });
         } finally {
           setIsLoader(false);
           setLoad(true);
@@ -176,7 +177,7 @@ export default function App() {
           const res = await mainApi.getUserInfo();
           setCurrentUser(res);
         } catch (err) {
-          //setIsInfoTooltip({ isOpen: true, successful: false, text: err });
+          setIsInfoTooltip({ isOpen: true, status: false, text: err });
         } finally {
           setIsLoader(false);
         }
@@ -195,13 +196,13 @@ export default function App() {
           );
           setSavedMoviesList(UserMoviesList);
         } catch (err) {
-          setIsInfoTooltip({ isOpen: true, successful: false, text: err });
+          setIsInfoTooltip({ isOpen: true, status: false, text: err });
         }
       }
     })();
   }, [currentUser, loggedIn]);
 
-  let element = useRoutes([
+  const element = useRoutes([
     { path: "/", element: <Main /> },
     {
       path: "signup",
@@ -218,6 +219,8 @@ export default function App() {
       element: (
         <ProtectedRoute
           isLoggedIn={loggedIn}
+          setIsLoader={setIsLoader}
+          setIsInfoTooltip={setIsInfoTooltip}
           element={Movies}
           savedMoviesList={savedMoviesList}
           onLikeClick={handleSaveMovie}
@@ -230,6 +233,7 @@ export default function App() {
       element: (
         <ProtectedRoute
           isLoggedIn={loggedIn}
+          setIsInfoTooltip={setIsInfoTooltip}
           element={SavedMovies}
           savedMoviesList={savedMoviesList}
           onLikeClick={handleSaveMovie}
@@ -261,6 +265,10 @@ export default function App() {
           <Header loggedIn={loggedIn} />
           {element}
           <Footer />
+          <InfoTooltip
+            isInfoTooltip={isInfoTooltip}
+            onClose={closeInfoTooltip}
+          />
         </CurrentUserContext.Provider>
       )}
     </div>

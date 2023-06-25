@@ -54,7 +54,19 @@ class Api {
   addNewMovie(movieData) {
     return this._fetchWithCheck('movies', {
       method: 'POST',
-      body: JSON.stringify(movieData),
+      body: JSON.stringify({
+        country: movieData.country,
+        director: movieData.director,
+        duration: movieData.duration,
+        year: movieData.year,
+        description: movieData.description,
+        image: movieData.image,
+        trailerLink: movieData.trailerLink,
+        thumbnail: movieData.thumbnail,
+        movieId: movieData.id,
+        nameRU: movieData.nameRU,
+        nameEN: movieData.nameEN,
+      }),
     });
   }
 

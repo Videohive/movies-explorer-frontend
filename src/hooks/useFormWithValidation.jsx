@@ -1,10 +1,17 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import isEmail from 'validator/es/lib/isEmail';
 
 export default function useFormWithValidation() {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
+
+  useEffect(() => {
+    const savedValues = JSON.parse(localStorage.getItem("formValues"));
+    if (savedValues) {
+        setValues(savedValues);
+    }
+  }, []);
 
   const handleChange = (e) => {
     const input = e.target;
@@ -25,6 +32,7 @@ export default function useFormWithValidation() {
     }
 
     setValues({ ...values, [name]: value });
+    localStorage.setItem("formValues", JSON.stringify({ ...values, [name]: value }));
     setErrors({ ...errors, [name]: input.validationMessage });
     setIsValid(input.closest('form').checkValidity());
   };
@@ -38,5 +46,5 @@ export default function useFormWithValidation() {
     [setValues, setErrors, setIsValid]
   );
 
-  return { values, errors, isValid, handleChange, resetForm, setIsValid };
+  return { values, handleChange, resetForm, errors, isValid };
 }

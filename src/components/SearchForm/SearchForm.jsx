@@ -1,21 +1,38 @@
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox.jsx";
-
-import React, { useEffect } from 'react';
+import { useEffect, useState, useContext } from "react";
+import { useLocation } from "react-router-dom";
 import useFormWithValidation from "../../hooks/useFormWithValidation.jsx";
+import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
 
-export default function SearchForm() {
+export default function SearchForm({
+  handleSearchSubmit,
+  handleShortFilms,
+  shortMovies,
+}) {
   const { values, handleChange, resetForm, errors, isValid } =
     useFormWithValidation();
+  const currentUser = useContext(CurrentUserContext);
+  const location = useLocation();
+
+  const [errorQuery, setErrorQuery] = useState("");
+
+  useEffect(() => {
+  }, [location.pathname]);
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(values.search); // здесь вы можете выполнить поиск
+    if(isValid){
+      handleSearchSubmit(values.search)
+      setErrorQuery("");
+    }else{
+      setErrorQuery("Нужно ввести ключевое слово");
+    }
   }
 
   useEffect(() => {
-    resetForm();
-  }, [resetForm]);
+    setErrorQuery("");
+  }, []);
 
   return (
     <div className="search">
@@ -38,20 +55,19 @@ export default function SearchForm() {
             autoComplete="off"
             required
           />
-          <span className="search__error">{errors.search || ""}</span>
+          <span className="search__error">{errorQuery}</span>
         </div>
         <button
           type="submit"
           className={`search__submit ${
             !isValid ? "search__submit_disabled" : ""
           }`}
-          disabled={!isValid}
+          //disabled={!isValid}
         >
           Найти
         </button>
       </form>
-      <FilterCheckbox />
+      <FilterCheckbox shortMovies={shortMovies} handleShortFilms={handleShortFilms} />
     </div>
   );
 }
-
