@@ -1,5 +1,5 @@
 import './Movies.css';
-import { useState, useContext, useEffect, useCallback } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import {
   transformImagesMovies,
   filterMovies, // фильтрация начального массива всех фильмов по запросу
@@ -79,6 +79,22 @@ export default function Movies({ setIsLoader, setIsInfoTooltip, savedMoviesList,
     }
     localStorage.setItem(`${currentUser.email} - shortMovies`, !shortMovies);
   }
+
+  // предварительная загрузка фильмов при монтирование компонента
+  useEffect(() => {
+    setIsLoader(true);
+    moviesApi
+      .getMovies()
+      .then(movies => {
+        setIsAllMovies(transformImagesMovies(movies));
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        setIsLoader(false);
+      });
+  }, []);
 
   useEffect(() => {
     if (localStorage.getItem(`${currentUser.email} - shortMovies`) === 'true') {

@@ -11,7 +11,6 @@ class MoviesApi {
     return res.ok ? result : Promise.reject(res);
   }
 
-  // регистрация
   async getMovies() {
     const res = await fetch(`${this._baseUrl}`, {
       method: 'GET',
@@ -19,7 +18,6 @@ class MoviesApi {
     });
     return this._requestResult(res);
   }
-
 }
 
 const moviesApi = new MoviesApi({

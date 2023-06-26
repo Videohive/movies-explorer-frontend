@@ -117,89 +117,92 @@ export default function App() {
   }, []);
 
   // добавление фильма
-  async function handleSaveMovie(movie) {
-    try {
-      const newMovie = await mainApi.addNewMovie(movie);
-      setSavedMoviesList([newMovie, ...savedMoviesList]);
-    } catch (err) {
-      setIsInfoTooltip({ isOpen: true, status: false, text: err });
-    }
+  function handleSaveMovie(movie) {
+    mainApi
+      .addNewMovie(movie)
+      .then((newMovie) => {
+        setSavedMoviesList([newMovie, ...savedMoviesList]);
+      })
+      .catch((err) => {
+        setIsInfoTooltip({ isOpen: true, status: false, text: err });
+      });
   }
 
   // удаление фильма
-  async function handleDeleteMovie(movie) {
+  function handleDeleteMovie(movie) {
     const savedMovie = savedMoviesList.find(
       (item) => item.movieId === movie.id || item.movieId === movie.movieId
     );
-    try {
-      await mainApi.deleteMovie(savedMovie._id);
-      const newMoviesList = savedMoviesList.filter(
-        (m) => movie.id !== m.movieId && movie.movieId !== m.movieId
-      );
-      setSavedMoviesList(newMoviesList);
-    } catch (err) {
-      setIsInfoTooltip({ isOpen: true, status: false, text: err });
-    }
+
+    mainApi
+      .deleteMovie(savedMovie._id)
+      .then(() => {
+        const newMoviesList = savedMoviesList.filter(
+          (m) => movie.id !== m.movieId && movie.movieId !== m.movieId
+        );
+        setSavedMoviesList(newMoviesList);
+      })
+      .catch((err) => {
+        setIsInfoTooltip({ isOpen: true, status: false, text: err });
+      });
   }
 
   // проверка токена и авторизация пользователя
   useEffect(() => {
-    (async function authenticateUser() {
-      const path = location.pathname;
-      const jwt = localStorage.getItem("jwt");
-      if (jwt) {
-        setIsLoader(true);
-        try {
-          const data = await mainApi.getUserInfo();
+    const path = location.pathname;
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      setIsLoader(true);
+      mainApi
+        .getUserInfo()
+        .then((data) => {
           if (data) {
             setLoggedIn(true);
             setCurrentUser(data);
             navigate(path, { replace: true });
           }
-        } catch (err) {
-          setIsInfoTooltip({ isOpen: true, status: false, text: err });
-        } finally {
+        })
+        .catch((err) =>
+          setIsInfoTooltip({ isOpen: true, status: false, text: err })
+        )
+        .finally(() => {
           setIsLoader(false);
           setLoad(true);
-        }
-      } else {
-        setLoad(true);
-      }
-    })();
-  }, [navigate]);
+        });
+    } else {
+      setLoad(true);
+    }
+  }, []);
 
   // получение информации о пользователе
   useEffect(() => {
-    (async function getUserInfo() {
-      if (loggedIn) {
-        setIsLoader(true);
-        try {
-          const res = await mainApi.getUserInfo();
-          setCurrentUser(res);
-        } catch (err) {
-          setIsInfoTooltip({ isOpen: true, status: false, text: err });
-        } finally {
-          setIsLoader(false);
-        }
-      }
-    })();
+    if (loggedIn) {
+      setIsLoader(true);
+      mainApi
+        .getUserInfo()
+        .then((res) => setCurrentUser(res))
+        .catch((err) =>
+          setIsInfoTooltip({ isOpen: true, status: false, text: err })
+        )
+        .finally(() => setIsLoader(false));
+    }
   }, [loggedIn]);
 
   // получение массива сохраненных фильмов
   useEffect(() => {
-    (async function getSavedMovies() {
-      if (loggedIn && currentUser) {
-        try {
-          const data = await mainApi.getSavedMovies();
+    if (loggedIn && currentUser) {
+      mainApi
+        .getSavedMovies()
+        .then((data) => {
           const UserMoviesList = data.filter(
             (m) => m.owner === currentUser._id
           );
           setSavedMoviesList(UserMoviesList);
-        } catch (err) {
+        })
+        .catch((err) => {
           setIsInfoTooltip({ isOpen: true, status: false, text: err });
-        }
-      }
-    })();
+        });
+    }
   }, [currentUser, loggedIn]);
 
   const element = useRoutes([

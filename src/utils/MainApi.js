@@ -9,17 +9,22 @@ class Api {
     };
   }
 
-  async _fetchWithCheck(endpoint, config = {}) {
-    const response = await fetch(`${this._baseUrl}/${endpoint}`, {
+  _fetchWithCheck(endpoint, config = {}) {
+    return fetch(`${this._baseUrl}/${endpoint}`, {
       ...config,
       headers: {
         ...this._headers,
         ...config.headers,
       },
+    })
+    .then(response => {
+      return response.json().then(data => {
+        if (!response.ok) {
+          throw new Error(data.message);
+        }
+        return data;
+      });
     });
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.message);
-    return data;
   }
 
   createUser({ name, email, password }) {
