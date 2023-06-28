@@ -64,7 +64,7 @@ export default function Profile({ handleSignOut, handleProfile, serverError }) {
           <button
             type="submit"
             className={`profile__button-edit ${
-              profileValidity ? "" : "profile__button-edit_disabled"
+              profileValidity ? "profile__button-edit_disabled" : ""
             }`}
             disabled={profileValidity ? true : false}
           >
