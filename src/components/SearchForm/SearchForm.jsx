@@ -10,7 +10,7 @@ export default function SearchForm({
   handleShortFilms,
   shortMovies,
 }) {
-  const { values, handleChange, resetForm, errors, isValid } =
+  const { values, handleChange, resetForm, errors, isValid, setIsValid, setValue } =
     useFormWithValidation();
   const currentUser = useContext(CurrentUserContext);
   const location = useLocation();
@@ -32,7 +32,21 @@ export default function SearchForm({
 
   useEffect(() => {
     setErrorQuery("");
-  }, []);
+  }, [isValid]);
+
+  useEffect(() => {
+    if (location.pathname === "/saved-movies") {
+      resetForm();
+    }
+  }, [location.pathname, resetForm]);
+
+  useEffect(() => {
+    if (location.pathname === '/movies' && localStorage.getItem(`${currentUser.email} - movieSearch`)) {
+      const searchValue = localStorage.getItem(`${currentUser.email} - movieSearch`);
+      setValue('search', searchValue);
+      setIsValid(true);
+    }
+  }, [currentUser]);
 
   return (
     <div className="search">
@@ -62,7 +76,7 @@ export default function SearchForm({
           className={`search__submit ${
             !isValid ? "search__submit_disabled" : ""
           }`}
-          //disabled={!isValid}
+          disabled={!isValid}
         >
           Найти
         </button>

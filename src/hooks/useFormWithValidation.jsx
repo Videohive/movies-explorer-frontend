@@ -6,6 +6,10 @@ export default function useFormWithValidation() {
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
 
+  const setValue = (field, value) => {
+    setValues(prevState => ({...prevState, [field]: value }));
+  };
+
   useEffect(() => {
     const savedValues = JSON.parse(localStorage.getItem("formValues"));
     if (savedValues) {
@@ -31,9 +35,9 @@ export default function useFormWithValidation() {
       }
     }
 
-    setValues({ ...values, [name]: value });
+    setValues(prevState => ({ ...prevState, [name]: value }));
     localStorage.setItem("formValues", JSON.stringify({ ...values, [name]: value }));
-    setErrors({ ...errors, [name]: input.validationMessage });
+    setErrors(prevState => ({ ...prevState, [name]: input.validationMessage }));
     setIsValid(input.closest('form').checkValidity());
   };
 
@@ -46,5 +50,5 @@ export default function useFormWithValidation() {
     [setValues, setErrors, setIsValid]
   );
 
-  return { values, handleChange, resetForm, errors, isValid };
+  return { values, handleChange, resetForm, errors, isValid, setIsValid, setValue };
 }
