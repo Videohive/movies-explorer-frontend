@@ -163,6 +163,7 @@ export default function App() {
         .getUserInfo()
         .then((res) => {
           setCurrentUser(res);
+          setServerError(null)
         })
         .catch((err) =>
           setIsInfoTooltip({ isOpen: true, status: false, text: err })
