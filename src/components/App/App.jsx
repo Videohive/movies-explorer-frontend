@@ -84,6 +84,7 @@ export default function App() {
       .updateUser({ name, email }) // передаем объект
       .then((newUserData) => {
         setCurrentUser(newUserData);
+        setIsInfoTooltip({ isOpen: true, status: true, text: 'Профиль обновлен' });
       })
       .catch((err) => setServerError(err.message))
       .finally(() => setIsLoader(false));
