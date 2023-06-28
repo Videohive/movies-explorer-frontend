@@ -2,7 +2,7 @@ import "./App.css";
 import mainApi from "../../utils/MainApi.js";
 import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
 import { useState, useEffect } from "react";
-import { useRoutes, useNavigate, useLocation } from "react-router-dom";
+import {Navigate, useRoutes, useNavigate, useLocation } from "react-router-dom";
 
 import Header from "../Header/Header.jsx";
 import Footer from "../Footer/Footer.jsx";
@@ -192,13 +192,19 @@ export default function App() {
     { path: "/", element: <Main /> },
     {
       path: "signup",
-      element: (
+      element: loggedIn ? (
+        <Navigate to="/" replace />
+      ) : (
         <Register handleRegister={handleRegister} serverError={serverError} />
       ),
     },
     {
       path: "signin",
-      element: <Login handleLogin={handleLogin} serverError={serverError} />,
+      element: loggedIn ? (
+        <Navigate to="/" replace />
+      ) : (
+        <Login handleLogin={handleLogin} serverError={serverError} />
+      ),
     },
     {
       path: "movies",
