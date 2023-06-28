@@ -94,7 +94,6 @@ export default function App() {
     setCurrentUser({});
     setLoggedIn(false);
     localStorage.clear();
-    navigate("/", { replace: true });
   }
 
   // добавление фильма
