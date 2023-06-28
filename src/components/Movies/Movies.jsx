@@ -1,12 +1,139 @@
-import './Movies.css';
-import SearchForm from '../SearchForm/SearchForm.jsx';
-import MoviesCardList from '../MoviesCardList/MoviesCardList.jsx';
+import "./Movies.css";
+import { useState, useContext, useEffect } from "react";
+import {
+  transformImagesMovies,
+  filterMovies, // фильтрация начального массива всех фильмов по запросу
+  filterShortMovies, // фильтрация по длительности
+} from "../../utils/utils.js";
+import moviesApi from "../../utils/MoviesApi.js";
+import SearchForm from "../SearchForm/SearchForm.jsx";
+import MoviesCardList from "../MoviesCardList/MoviesCardList.jsx";
+import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
 
-export default function Movies() {
+export default function Movies({
+  setIsLoader,
+  setIsInfoTooltip,
+  savedMoviesList,
+  onLikeClick,
+  onDeleteClick,
+}) {
+  const currentUser = useContext(CurrentUserContext);
+
+  const [shortMovies, setShortMovies] = useState(false);
+  const [initialMovies, setInitialMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
+  const [NotFound, setNotFound] = useState(false);
+  const [isAllMovies, setIsAllMovies] = useState([]);
+
+  function handleSetFilteredMovies(movies, userQuery, shortMoviesCheckbox) {
+    const moviesList = filterMovies(movies, userQuery, shortMoviesCheckbox);
+    if (moviesList.length === 0) {
+      setIsInfoTooltip({
+        isOpen: true,
+        successful: false,
+        text: "Ничего не найдено.",
+      });
+      setNotFound(true);
+    } else {
+      setNotFound(false);
+    }
+    setInitialMovies(moviesList);
+    setFilteredMovies(
+      shortMoviesCheckbox ? filterShortMovies(moviesList) : moviesList
+    );
+    localStorage.setItem("movies", JSON.stringify(moviesList));
+  }
+
+  function handleSearchSubmit(inputValue) {
+    localStorage.setItem("movieSearch", inputValue);
+    localStorage.setItem("shortMovies", shortMovies);
+
+    if (isAllMovies.length === 0) {
+      setIsLoader(true);
+      moviesApi
+        .getMovies()
+        .then((movies) => {
+          setIsAllMovies(transformImagesMovies(movies));
+          handleSetFilteredMovies(
+            transformImagesMovies(movies),
+            inputValue,
+            shortMovies
+          );
+        })
+        .catch(() =>
+          setIsInfoTooltip({
+            isOpen: true,
+            successful: false,
+            text: "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз",
+          })
+        )
+        .finally(() => setIsLoader(false));
+    } else {
+      handleSetFilteredMovies(isAllMovies, inputValue, shortMovies);
+    }
+  }
+
+  function handleShortFilms() {
+    setShortMovies(!shortMovies);
+    if (!shortMovies) {
+      setFilteredMovies(filterShortMovies(initialMovies));
+    } else {
+      setFilteredMovies(initialMovies);
+    }
+    localStorage.setItem("shortMovies", !shortMovies);
+  }
+
+  // предварительная загрузка фильмов при монтирование компонента
+  useEffect(() => {
+    setIsLoader(true);
+    moviesApi
+      .getMovies()
+      .then((movies) => {
+        setIsAllMovies(transformImagesMovies(movies));
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoader(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem("shortMovies") === "true") {
+      setShortMovies(true);
+    } else {
+      setShortMovies(false);
+    }
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (localStorage.getItem("movies")) {
+      const movies = JSON.parse(localStorage.getItem("movies"));
+      setInitialMovies(movies);
+      if (localStorage.getItem("shortMovies") === "true") {
+        setFilteredMovies(filterShortMovies(movies));
+      } else {
+        setFilteredMovies(movies);
+      }
+    }
+  }, [currentUser]);
+
   return (
     <main className="movies">
-      <SearchForm/>
-      <MoviesCardList/>
+      <SearchForm
+        handleSearchSubmit={handleSearchSubmit}
+        handleShortFilms={handleShortFilms}
+        shortMovies={shortMovies}
+      />
+      {!NotFound && (
+        <MoviesCardList
+          moviesList={filteredMovies}
+          savedMoviesList={savedMoviesList}
+          onLikeClick={onLikeClick}
+          onDeleteClick={onDeleteClick}
+        />
+      )}
     </main>
   );
 }

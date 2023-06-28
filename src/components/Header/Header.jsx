@@ -3,7 +3,7 @@ import logo from "../../images/logo.svg";
 import { Link, useLocation } from "react-router-dom";
 import Navigation from "../Navigation/Navigation.jsx";
 
-export default function Header() {
+export default function Header({loggedIn}) {
   const location = useLocation();
   const headerRoutes = ["/", "/movies", "/saved-movies", "/profile"];
 
@@ -18,7 +18,7 @@ export default function Header() {
           <Link to="/" className="header__link">
             <img src={logo} alt="Логотип" />
           </Link>
-          <Navigation />
+          <Navigation loggedIn={loggedIn}/>
         </div>
       </header>
     );

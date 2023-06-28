@@ -38,6 +38,7 @@
   text-decoration: none;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+  text-align: center;
 }
 
 .navigation__link-register {
@@ -62,6 +63,7 @@
 }
 
 .navigation__link_type_account {
+  display: flex;
   position: relative;
   font-weight: 500;
   font-size: 14px;
@@ -70,21 +72,9 @@
   min-height: 30px;
   border-radius: 40px;
   align-items: center;
-  text-indent: 30px;
+  text-indent: 7px;
   border: solid 2px #efefef;
-  padding: 0 5px;
-}
-
-.navigation__link_type_account::before {
-  position: absolute;
-  content: "";
-  top: 0;
-  left: 0;
-  width: 30px;
-  height: 100%;
-  background-image: url("../../images/profile.svg");
-  background-repeat: no-repeat;
-  background-position: center;
+  padding: 0 10px;
 }
 
 .navigation__modal {
@@ -131,22 +121,22 @@
 }
 
 @media screen and (max-width: 800px) {
-
   .navigation__list {
     gap: 28px 30px;
   }
 
-  .navigation__link_landing{
+  .navigation__link_landing {
     font-size: 12px;
     line-height: 16px;
   }
 
-  .navigation__item:last-child {
+  .navigation__item-mobile {
     margin-top: 591px;
   }
 }
 
 @media screen and (max-width: 400px) {
+
   .navigation-burger {
     padding-top: 144px;
   }
@@ -165,7 +155,7 @@
     line-height: 22px;
   }
 
-  .navigation__link_type_account {
+  .navigation__link_type_account-mobile {
     font-size: 14px;
     line-height: 16px;
   }
@@ -174,7 +164,7 @@
     width: 100%;
   }
 
-  .navigation__item:last-child {
+  .navigation__item-mobile {
     margin-top: 444px;
   }
 }

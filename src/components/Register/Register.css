@@ -152,6 +152,13 @@
   color: #EE3465;
 }
 
+.register__error-message {
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  min-height: 12px;
+  min-height: 12px;
+}
 
 @media screen and (max-width: 400px) {
   .register {
