@@ -71,7 +71,6 @@ export default function App() {
         if (jwt.token) {
           localStorage.setItem("jwt", jwt.token);
           setLoggedIn(true);
-          handleUser();
           navigate("/movies", { replace: true });
         }
       })
@@ -90,31 +89,12 @@ export default function App() {
       .finally(() => setIsLoader(false));
   }
 
-  function handleUser() {
-    setIsLoader(true);
-    mainApi
-      .getUserInfo()
-      .then((userData) => {
-        setCurrentUser(userData);
-      })
-      .catch((err) => setServerError(err.message))
-      .finally(() => setIsLoader(false));
-  }
-
   function handleSignOut() {
     setCurrentUser({});
     setLoggedIn(false);
     localStorage.clear();
     navigate("/", { replace: true });
   }
-
-  useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      setLoggedIn(true);
-      handleUser();
-    }
-  }, []);
 
   // добавление фильма
   function handleSaveMovie(movie) {
@@ -180,7 +160,9 @@ export default function App() {
       setIsLoader(true);
       mainApi
         .getUserInfo()
-        .then((res) => setCurrentUser(res))
+        .then((res) => {
+          setCurrentUser(res);
+        })
         .catch((err) =>
           setIsInfoTooltip({ isOpen: true, status: false, text: err })
         )

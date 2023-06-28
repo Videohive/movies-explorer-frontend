@@ -13,7 +13,8 @@ class Api {
     return fetch(`${this._baseUrl}/${endpoint}`, {
       ...config,
       headers: {
-        ...this._headers,
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('jwt')}`,
         ...config.headers,
       },
     })

@@ -41,8 +41,8 @@ export default function SearchForm({
   }, [location.pathname, resetForm]);
 
   useEffect(() => {
-    if (location.pathname === '/movies' && localStorage.getItem(`${currentUser.email} - movieSearch`)) {
-      const searchValue = localStorage.getItem(`${currentUser.email} - movieSearch`);
+    if (location.pathname === '/movies' && localStorage.getItem("movieSearch")) {
+      const searchValue = localStorage.getItem("movieSearch");
       setValue('search', searchValue);
       setIsValid(true);
     }

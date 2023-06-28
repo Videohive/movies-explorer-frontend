@@ -36,7 +36,7 @@ export default function useFormWithValidation() {
     }
 
     setValues(prevState => ({ ...prevState, [name]: value }));
-    localStorage.setItem("formValues", JSON.stringify({ ...values, [name]: value }));
+    //localStorage.setItem("formValues", JSON.stringify({ ...values, [name]: value }));
     setErrors(prevState => ({ ...prevState, [name]: input.validationMessage }));
     setIsValid(input.closest('form').checkValidity());
   };
